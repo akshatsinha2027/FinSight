@@ -8,7 +8,7 @@ st.set_page_config(page_title="FinSight - Stock Forecasting App", layout="wide")
 
 def import_data(ticker:str):                 # 1.
     import yfinance as yf
-    df=yf.download(ticker,start="2018-01-01", end="2025-10-22")
+    df=yf.download(ticker,start="2018-01-01",end="2025-10-22")
     df=df.reset_index()
     df.columns=['Date','Adj Close','Close','High','Low','Open','Volume']
     beginning_cols=['Date','Open','Close','Adj Close']
