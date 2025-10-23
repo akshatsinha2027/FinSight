@@ -1,6 +1,6 @@
 streamlit
 tensorflow
-yfinance
+yfinance>=0.2.29
 pandas
 numpy
 ta
