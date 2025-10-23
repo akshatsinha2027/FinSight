@@ -8,7 +8,14 @@ st.set_page_config(page_title="FinSight - Stock Forecasting App", layout="wide")
 
 def import_data(ticker:str):                 # 1.
     import yfinance as yf
-    df=yf.download(ticker,start="2018-01-01",end="2025-10-22")
+    from datetime import date
+    try:
+        df = yf.download(ticker,start="2008-01-01",end=str(date.today()))
+        if df.empty:
+            raise ValueError("No data returned from Yahoo Finance")
+    except Exception as e:
+        st.error(f"Live fetch failed: {e}")
+        # fallback if needed
     df=df.reset_index()
     df.columns=['Date','Adj Close','Close','High','Low','Open','Volume']
     beginning_cols=['Date','Open','Close','Adj Close']
