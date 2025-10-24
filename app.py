@@ -8,14 +8,7 @@ st.set_page_config(page_title="FinSight - Stock Forecasting App", layout="wide")
 
 def import_data(ticker:str):                 # 1.
     import yfinance as yf
-    from datetime import date
-    try:
-        df = yf.download(ticker,start="2008-01-01",end=str(date.today()))
-        if df.empty:
-            raise ValueError("No data returned from Yahoo Finance")
-    except Exception as e:
-        st.error(f"Live fetch failed: {e}")
-        # fallback if needed
+    df=yf.download(ticker,period='max',auto_adjust=False)
     df=df.reset_index()
     df.columns=['Date','Adj Close','Close','High','Low','Open','Volume']
     beginning_cols=['Date','Open','Close','Adj Close']
@@ -114,7 +107,7 @@ st.write("Enter a stock ticker to forecast future prices.")
 
 ticker=st.text_input("Enter Stock Ticker :")
 k=st.slider("Forecast Days Ahead:",min_value=1,max_value=10,value=1,step=1)
-n_steps=st.slider("Past Days (LookBack Window) :",min_value=100,max_value=210,value=1,step=1)
+n_steps=st.slider("Past Days (LookBack Window) :",min_value=100,max_value=200,value=1,step=1)
 
 # Buttons
 if st.button("Run Forecast"):
