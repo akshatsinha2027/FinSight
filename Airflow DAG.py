@@ -91,3 +91,5 @@ def predict(model,scaler,x_test):
     y_pred=model.predict(x_test)
     y_final=scaler.inverse_transform(y_pred)
     return y_final
+
+
