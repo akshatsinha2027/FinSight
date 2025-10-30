@@ -6,6 +6,7 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"  # suppress TF logs
 
 import streamlit as st
 import pandas as pd
+import yfinance as yf
 import numpy as np
 from tensorflow.keras.models import load_model
 
@@ -18,7 +19,6 @@ st.write("Enter a stock ticker symbol to forecast future prices using GRU deep l
 # ───────────────────────────────────────────────
 # 1️⃣ Import Stock Data
 def import_data(ticker: str):
-    import yfinance as yf
     yf.utils.set_proxy(None)
     df = yf.download(ticker, period='max', auto_adjust=False)
     df = df.reset_index()
