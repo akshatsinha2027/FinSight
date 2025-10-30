@@ -19,7 +19,7 @@ st.write("Enter a stock ticker symbol to forecast future prices using GRU deep l
 # ───────────────────────────────────────────────
 # 1️⃣ Import Stock Data
 def import_data(ticker: str):
-    yf.utils.set_proxy(None)
+    # yf.utils.set_proxy(None)
     df = yf.download(ticker, period='max', auto_adjust=False)
     df = df.reset_index()
     df.columns = ['Date', 'Adj Close', 'Close', 'High', 'Low', 'Open', 'Volume']
