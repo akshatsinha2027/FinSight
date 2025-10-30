@@ -82,7 +82,7 @@ def model_train(df,n_steps=100,k=1):          # 3.
     history=model.fit(x_train,y_train,epochs=30,batch_size=32,validation_split=0.2,verbose=-1)
     model.save('models/finsight_gru.h5')
     print("✅ Model trained and saved.")
-    return model,scaler,x_test
+    return model,scaler,x_test,y_test
 
 def predict(model,scaler,x_test,y_test):      # 4.
     y_pred=model.predict(x_test)
