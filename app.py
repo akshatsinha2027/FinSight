@@ -86,8 +86,8 @@ def model_train(df,n_steps=100,k=1):          # 3.
 
 def predict(model,scaler,x_test,y_test):      # 4.
     y_pred=model.predict(x_test)
-    y_final=scaler.inverse_transform(y_pred)
-    y_test=scaler.inverse_transform(y_test)
+    y_final=scaler.inverse_transform(y_pred.reshape(-1,1))
+    y_test=scaler.inverse_transform(y_test.reshape(-1,1))
     import matplotlib.pyplot as plt
     plt.plot(y_final,label='Predicted')
     plt.plot(y_test,label='Actual')
