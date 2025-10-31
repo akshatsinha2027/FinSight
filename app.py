@@ -96,8 +96,6 @@ def predict(model,scaler,x_test,y_test):      # 4.
     plt.show()
     from sklearn.metrics import mean_absolute_percentage_error
     mape=mean_absolute_percentage_error(y_test,y_final)*100
-    print("Precited Price: ",y_final)
-    print("Has a Mean Absolute Percentage Error of ",mape)
     return y_final,mape
 
 # Streamlit UI
@@ -125,3 +123,5 @@ if st.button("Run Forecast"):
         pred=predict(model,scaler,x_test,y_test)
 
     st.success("Forecast Complete!")
+    st.success("Precited Price: ",pred[0])
+    st.success("Has a Mean Absolute Percentage Error of ",pred[1])
