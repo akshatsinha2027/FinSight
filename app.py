@@ -120,8 +120,29 @@ if st.button("Run Forecast"):
         model,scaler,x_test,y_test=model_train(df,n_steps,k)
 
     with st.spinner("Predicting future prices..."):
-        pred=predict(model,scaler,x_test,y_test)
+        y_final,mape=predict(model,scaler,x_test,y_test)
 
     st.success("Forecast Complete!")
-    st.success("Precited Price: ",pred[0])
-    st.success("Has a Mean Absolute Percentage Error of ",pred[1])
+    # Show results clearly
+    st.subheader("📊 Prediction Summary")
+
+    # Show last predicted price
+    st.metric(label="Predicted Price (Most Recent Day)",value=f"${y_final[-1][0]:.2f}")
+
+    # Show MAPE
+    st.metric(label="Mean Absolute Percentage Error (MAPE)",value=f"{mape:.2f}%")
+
+    # Display the predicted prices as a dataframe
+    st.subheader("📈 Predicted Prices")
+    pred_df=pd.DataFrame(y_final,columns=["Predicted_Price"])
+    st.dataframe(pred_df.tail(10))  # show last 10 predicted prices
+
+    # Plot predicted vs actual inline
+    import matplotlib.pyplot as plt
+
+    fig,ax=plt.subplots(figsize=(10, 5))
+    ax.plot(y_final,label="Predicted",color="orange")
+    ax.plot(scaler.inverse_transform(y_test.reshape(-1, 1)),label="Actual",color="blue")
+    ax.set_title("Predicted vs Actual Prices")
+    ax.legend()
+    st.pyplot(fig)
