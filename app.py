@@ -82,9 +82,9 @@ def model_train(df,n_steps=100,k=1):          # 3.
     history=model.fit(x_train,y_train,epochs=30,batch_size=32,validation_split=0.2,verbose=-1)
     model.save('models/finsight_gru.h5')
     print("✅ Model trained and saved.")
-    return model,scaler,x_test,y_test,k
+    return model,scaler,x_test,y_test
 
-def predict(model,scaler,x_test,y_test,k):      # 4.
+def predict(model,scaler,x_test,y_test):      # 4.
     y_pred=model.predict(x_test)
     y_final=scaler.inverse_transform(y_pred.reshape(-1,1))
     y_test=scaler.inverse_transform(y_test.reshape(-1,1))
@@ -96,7 +96,7 @@ def predict(model,scaler,x_test,y_test,k):      # 4.
     plt.show()
     from sklearn.metrics import mean_absolute_percentage_error
     mape=mean_absolute_percentage_error(y_test,y_final)*100
-    return y_final[-k],mape
+    return y_final,mape
 
 # Streamlit UI
 
@@ -117,10 +117,10 @@ if st.button("Run Forecast"):
     st.success(f"Data fetched successfully! {df.shape[0]} rows.")
 
     with st.spinner("Training GRU model... (takes a few mins)"):
-        model,scaler,x_test,y_test,k=model_train(df,n_steps,k)
+        model,scaler,x_test,y_test=model_train(df,n_steps,k)
 
     with st.spinner("Predicting future prices..."):
-        y_final,mape=predict(model,scaler,x_test,y_test,k)
+        y_final,mape=predict(model,scaler,x_test,y_test)
 
     st.success("Forecast Complete!")
     # Show results clearly
@@ -135,14 +135,14 @@ if st.button("Run Forecast"):
     # Display the predicted prices as a dataframe
     st.subheader("📈 Predicted Prices")
     pred_df=pd.DataFrame(y_final,columns=["Predicted_Price"])
-    st.dataframe(pred_df.tail(10))  # show last 10 predicted prices
+    st.dataframe(pred_df.tail(k))  # show last 10 predicted prices
 
     # Plot predicted vs actual inline
     import matplotlib.pyplot as plt
 
     fig,ax=plt.subplots(figsize=(10, 5))
     ax.plot(y_final,label="Predicted",color="orange")
-    ax.plot(scaler.inverse_transform(y_test.reshape(-1, 1)),label="Actual",color="blue")
+    ax.plot(scaler.inverse_transform(y_test.reshape(-1,1)),label="Actual",color="blue")
     ax.set_title("Predicted vs Actual Prices")
     ax.legend()
     st.pyplot(fig)
