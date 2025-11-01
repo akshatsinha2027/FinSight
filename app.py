@@ -82,9 +82,9 @@ def model_train(df,n_steps=100,k=1):          # 3.
     history=model.fit(x_train,y_train,epochs=30,batch_size=32,validation_split=0.2,verbose=-1)
     model.save('models/finsight_gru.h5')
     print("✅ Model trained and saved.")
-    return model,scaler,x_test,y_test
+    return model,scaler,x_test,y_test,k
 
-def predict(model,scaler,x_test,y_test):      # 4.
+def predict(model,scaler,x_test,y_test,k):      # 4.
     y_pred=model.predict(x_test)
     y_final=scaler.inverse_transform(y_pred.reshape(-1,1))
     y_test=scaler.inverse_transform(y_test.reshape(-1,1))
@@ -96,7 +96,7 @@ def predict(model,scaler,x_test,y_test):      # 4.
     plt.show()
     from sklearn.metrics import mean_absolute_percentage_error
     mape=mean_absolute_percentage_error(y_test,y_final)*100
-    return y_final,mape
+    return y_final[-k],mape
 
 # Streamlit UI
 
