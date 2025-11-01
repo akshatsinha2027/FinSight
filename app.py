@@ -117,10 +117,10 @@ if st.button("Run Forecast"):
     st.success(f"Data fetched successfully! {df.shape[0]} rows.")
 
     with st.spinner("Training GRU model... (takes a few mins)"):
-        model,scaler,x_test,y_test=model_train(df,n_steps,k)
+        model,scaler,x_test,y_test,k=model_train(df,n_steps,k)
 
     with st.spinner("Predicting future prices..."):
-        y_final,mape=predict(model,scaler,x_test,y_test)
+        y_final,mape=predict(model,scaler,x_test,y_test,k)
 
     st.success("Forecast Complete!")
     # Show results clearly
