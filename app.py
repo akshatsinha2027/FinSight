@@ -127,7 +127,7 @@ if st.button("Run Forecast"):
     st.subheader("📊 Prediction Summary")
 
     # Show last predicted price
-    st.metric(label="Predicted Prices (Days)",value=f"${y_final:.2f}")
+    #st.metric(label="Predicted Prices (Days)",value=f"${y_final:.2f}")
 
     # Show MAPE
     st.metric(label="Mean Absolute Percentage Error (MAPE)",value=f"{mape:.2f}%")
