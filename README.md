@@ -1,36 +1,54 @@
-# FinSight – Automated Stock Forecasting Platform
+# FinSight – Stock Price Forecasting App
+Deployed App: https://finsightdemo.streamlit.app
+Tech Stack: Python · TensorFlow · Prophet · ARIMA · GRU · Streamlit
 ## Overview
-FinSight is an automated stock price forecasting system that predicts future stock trends using hybrid deep learning and time-series models.
-It integrates GRU, LSTM, Prophet, and ARIMA, with a fully automated pipeline powered by Apache Airflow and a Streamlit dashboard for visualization.
+FinSight is a deep learning–powered stock forecasting app that predicts the next-k-day closing prices of any listed stock using GRU and hybrid Prophet models.
+It combines classical time-series forecasting with modern deep learning to deliver accurate, interactive predictions for retail investors and analysts.
 ## Key Features
- Deep Learning Forecasting: GRU achieves MAPE of 2.8% — outperforming Prophet and ARIMA.
- Feature Engineering: Incorporates RSI, MACD, and moving averages (10/20/50/100/200 days) for trend analysis.
- Automation: Airflow DAG automates data fetching → preprocessing → model training → prediction.
- Interactive Dashboard: Streamlit app visualizes real-time forecasts, trends, and evaluation metrics.
- Hybrid Modeling: Combines Prophet + GRU (MAPE = 9.5%) for benchmark comparison.
+Data Ingestion: Fetches real-time data from Yahoo Finance API.
+Feature Engineering: Generates MACD, RSI, SMA/EMA, and lag features for trend detection.
+Modeling:
+ARIMA & Prophet (classical models)
+LSTM & GRU (deep learning models)
+Prophet + GRU hybrid ensemble
+Evaluation: Mean Absolute Percentage Error (MAPE) and visual comparison plots.
+Deployment: Interactive Streamlit app for real-time forecasting & visualization.
+## Architecture
+Data Fetching → Feature Engineering → Model Training (ARIMA, Prophet, GRU)
+                     ↓
+           Hybrid Forecast Generation
+                     ↓
+       Visualization via Streamlit Dashboard
 ## Tech Stack
-Languages: Python
-Libraries: TensorFlow, Keras, Prophet, ARIMA, Pandas, NumPy
-Automation: Apache Airflow
-Visualization: Matplotlib, Streamlit
-## Model Comparison
-Model	Type	Metric	MAPE
-ARIMA	Statistical	15.9%	
-Prophet	Additive Time Series	14.7%	
-LSTM	Deep Learning	4.4%	
-GRU	Deep Learning (Final)	2.8%	
-Prophet + GRU	Hybrid	9.5%	
-## Business Impact
-FinSight automates the end-to-end forecasting workflow, allowing analysts to monitor trends, evaluate model performance, and make informed investment decisions — without manual intervention.
+Category	Tools
+Data Source	Yahoo Finance (via yfinance)
+Modeling	ARIMA, Prophet, LSTM, GRU
+Frameworks	TensorFlow, Scikit-learn
+Visualization	Matplotlib, Streamlit
+Languages	Python
+Deployment	Streamlit Community Cloud
+## Results
+Model	Metric	Performance
+GRU	MAPE	2.8%
+Hybrid Prophet + GRU	MAPE	9.5%
+ARIMA	MAPE	15.2%
+Prophet	MAPE	12.1%
+--> GRU outperformed all others, showing strong short-term prediction accuracy.
+## App Interface
+User Input: Enter any stock ticker symbol (e.g., AAPL, MSFT, TSLA).
+Outputs:
+Predicted vs. Actual plots
+MAPE scores
+Next-k-day forecast table
+## Learning Takeaways
+Implemented end-to-end time-series forecasting pipeline from raw data to deployment.
+Gained experience in deep learning sequence models (GRU, LSTM).
+Learned app deployment and visualization using Streamlit.
 ## Future Enhancements
-Integrate live market APIs for real-time updates.
-Add Explainability (SHAP/LIME) for model transparency.
-Extend to multi-stock portfolio predictions.
-## Demo & Documentation
-GRU Model Notebook
-Streamlit App Link
-Airflow DAG Code
+Add automatic daily retraining pipeline.
+Integrate Docker and Airflow for scheduling.
+Connect to a cloud database for persistent forecasts.
+Explore transformer-based forecasting (Informer / Temporal Fusion Transformer).
 ## Author
 Akshat Sinha
-Integrated M.Tech, IIT (ISM) Dhanbad
-Aspiring ML Engineer / Data Scientist
+Data Science & AI Enthusiast | IIT (ISM) Dhanbad
