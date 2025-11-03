@@ -20,13 +20,12 @@ Data Fetching → Feature Engineering → Model Training (ARIMA, Prophet, GRU)
                      ↓
        Visualization via Streamlit Dashboard
 ## Tech Stack
-Category	Tools
-Data Source	Yahoo Finance (via yfinance)
-Modeling	ARIMA, Prophet, LSTM, GRU
-Frameworks	TensorFlow, Scikit-learn
-Visualization	Matplotlib, Streamlit
-Languages	Python
-Deployment	Streamlit Community Cloud
+1.Data Source --> Yahoo Finance (via yfinance)
+2.Modeling --> ARIMA, Prophet, LSTM, GRU
+3.Frameworks --> TensorFlow, Scikit-learn
+4.Visualization --> Matplotlib, Streamlit
+5.Languages --> Python
+6.Deployment --> Streamlit Community Cloud
 ## Results
 Model	Metric	Performance
 GRU	MAPE	2.8%
