@@ -1,6 +1,6 @@
 # FinSight – Stock Price Forecasting App
 Deployed App: https://finsightdemo.streamlit.app
-Tech Stack: Python · TensorFlow · Prophet · ARIMA · GRU · Streamlit
+Tech Stack: Python, TensorFlow, Prophet, ARIMA, LSTM, GRU, Streamlit 
 ## Overview
 FinSight is a deep learning–powered stock forecasting app that predicts the next-k-day closing prices of any listed stock using GRU and hybrid Prophet models.
 It combines classical time-series forecasting with modern deep learning to deliver accurate, interactive predictions for retail investors and analysts.
